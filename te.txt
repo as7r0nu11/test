@@ -1,0 +1,11 @@
+$AllObjectsPropertyGuid = $Guids.GetEnumerator() | ?{$_.value -eq 'All'} | select -ExpandProperty name
+
+
+$ACE = New-ADObjectAccessControlEntry -Verbose -PrincipalIdentity 'JKOHLER' -Right GenericAll -AccessControlType Allow -InheritanceType All -InheritedObjectType $AllObjectsPropertyGuid
+
+
+$OU = Get-DomainOU -Raw (OU GUID)
+$DsEntry = $OU.GetDirectoryEntry()
+$dsEntry.PsBase.Options.SecurityMasks = 'Dacl'
+$dsEntry.PsBase.ObjectSecurity.AddAccessRule($ACE)
+$dsEntry.PsBase.CommitChanges()
