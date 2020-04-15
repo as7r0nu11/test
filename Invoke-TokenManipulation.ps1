@@ -1929,3 +1929,4 @@ Blog on this script: http://clymb3r.wordpress.com/2013/11/03/powershell-and-toke
     Main
 }
 Invoke-TokenManipulation -Enumerate -Verbose
+#Invoke-TokenManipulation -Username '' -CreateProcess 'cmd.exe' -Verbose
